@@ -30,6 +30,7 @@ const ErrorMessage = ref("");
 const WarningMessage = ref("");
 const InfoMessage = ref("");
 const Loading = ref(false);
+const InputTextValue = ref(null);
 
 // ── File Drop State ─────────────────────────────────────────────────
 const dropzoneActive = ref(false);
@@ -665,6 +666,12 @@ function copySegment(text, index) {
   M3eSnackbar.open(`片段 ${index} 已复制！`);
 }
 
+function clearInputText(){
+  const d = document.getElementById("MainTextInput");
+  document.querySelector("#MainTextInput").value = "";
+  InputText.value = "";
+
+}
 function closeWeakPassword() {
   const d = document.getElementById("WeakPasswordDialog");
   if (d.hide) d.hide(); else d.open = false;
@@ -1093,9 +1100,13 @@ onUnmounted(() => {
             <div v-if="InputMode === 'TEXT'" style="margin-bottom:28px;">
               <m3e-form-field hide-subscript="always" variant="outlined" style="width:100%;" class="multiline-input">
                 <label slot="label">话语</label>
-                <textarea placeholder="你想吟唱的话语" autocomplete="off" type="text" :value="InputText"
+                <textarea id="MainTextInput" placeholder="你想吟唱的话语" autocomplete="off" type="text" :value="InputText"
                   @input="InputText = $event.target.value" rows="4"></textarea>
               </m3e-form-field>
+              <m3e-icon-button id="TextClearButton" v-if="InputText != '' && InputText != null" variant="tonal" 
+                 @click="clearInputText" size="extra-small" style="position: absolute; margin-left: -40px; margin-top: 8px; ">
+                <m3e-icon name="close"></m3e-icon>
+              </m3e-icon-button>
             </div>
 
             <!-- File Input -->

@@ -509,6 +509,10 @@ body {
   align-self: flex-start;
 }
 
+#TextClearButton{
+  opacity: 0.8;
+}
+
 /* ── Multi-segment UI (Flexible Transfer) ── */
 .segment-list {
   display: flex;
@@ -695,6 +699,17 @@ body {
   transform: translateY(-10px);
 }
 
+.appear-enter-active,
+.appear-leave-active {
+
+  transition: opacity 0.2s ease-in-out; 
+}
+
+.appear-enter-from,
+.appear-leave-to {
+  opacity: 0;
+}
+
 /* ── Scrollbar ── */
 ::-webkit-scrollbar {
   width: 8px;
@@ -712,6 +727,10 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: var(--md-sys-color-outline);
+}
+
+#MainTextInput{
+  scrollbar-width: none;
 }
 
 @media (max-width: 1350px) {
