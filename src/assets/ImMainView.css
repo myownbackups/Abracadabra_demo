@@ -592,12 +592,10 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-@media (prefers-color-scheme: dark) {
-  .info-card.warning {
+.info-card.warning:not(.light) {
     background: #4e342e;
     color: #ffcc80;
   }
-}
 
 .info-card.insight {
   background: var(--md-sys-color-secondary-container);
