@@ -1,4 +1,15 @@
 <script setup>
+/*
+ * Copyright (C) 2025-2026 SheepChef (a.k.a. Haruka Hokuto)
+ *
+ * 这是一个源代码公开的软件。
+ * 在遵守AIPL-1.2许可证的前提下，
+ * 你可以自由复制，修改，分发，使用它。
+ *
+ * 查阅 Academic Innovation Protection License(AIPL) 来了解更多 .
+ * 本作品应随附一份完整的 AIPL-1.2 许可证全文。
+ *
+ */
 import { ref, onMounted, onUnmounted, inject, watch, nextTick } from "vue";
 import { getStep, timeUntilTotpExpiryFormatted } from "@/misc";
 import { Abracadabra } from "abracadabra-cn";
@@ -1393,7 +1404,7 @@ onUnmounted(() => {
          ║  FOOTER — Copyright & Easter Egg Trigger
          ╚══════════════════════════════════════════════════ -->
     <footer class="app-footer">
-      <div>中国制造 • AIPL-1.1许可</div>
+      <div>中国制造 • AIPL-1.2许可</div>
       <div>Copyright &copy; 2025-{{ new Date().getFullYear() }} <a href="https://shef.cc" target="_blank"
           rel="noopener noreferrer" style="color:var(--md-sys-color-on-surface);">SheepChef</a></div>
     </footer>
@@ -1455,7 +1466,7 @@ onUnmounted(() => {
           <m3e-list-item>
             <m3e-icon slot="leading" name="gavel"></m3e-icon>
             许可证
-            <span slot="supporting-text">AIPL-1.1</span>
+            <span slot="supporting-text">AIPL-1.2</span>
           </m3e-list-item>
         </m3e-list>
 
@@ -1532,13 +1543,13 @@ onUnmounted(() => {
           style="border-radius: 12px; background: var(--md-sys-color-surface-container-low); overflow: hidden;">
           <m3e-list-action href="https://github.com/SheepChef/Abracadabra" target="_blank" rel="noopener noreferrer">
             abracadabra-cn
-            <span slot="supporting-text">©SheepChef | AIPL-1.1</span>
+            <span slot="supporting-text">©SheepChef | AIPL-1.2</span>
             <m3e-icon slot="trailing" name="open_in_new"></m3e-icon>
           </m3e-list-action>
           <m3e-list-action href="https://github.com/SheepChef/Abracadabra_nodedemo" target="_blank"
             rel="noopener noreferrer">
             abracadabra-demo
-            <span slot="supporting-text">©SheepChef | AIPL-1.1</span>
+            <span slot="supporting-text">©SheepChef | AIPL-1.2</span>
             <m3e-icon slot="trailing" name="open_in_new"></m3e-icon>
           </m3e-list-action>
           <m3e-list-action href="https://github.com/matraic/m3e" target="_blank" rel="noopener noreferrer">
