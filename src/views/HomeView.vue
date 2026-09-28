@@ -689,6 +689,15 @@ function closeWeakPassword() {
 }
 function ignoreWeakPassword() { document.cookie = "AdvancedEncWeakPasswordIgnore=true"; closeWeakPassword(); }
 
+function showPWANotSupportedDialog() {
+  const d = document.getElementById("PWANotSupportedDialog");
+  if (d.hide) d.show(); else d.open = true;
+}
+
+function closePWANotSupportedDialog() {
+  const d = document.getElementById("PWANotSupportedDialog");
+  if (d.hide) d.hide(); else d.open = false;
+}
 
 function showCompatibilityDialog() {
   const d = document.getElementById("CompatibilityDialog");
@@ -720,6 +729,9 @@ function closeLicenseDialog() {
 }
 function openRepo() {
   window.open("https://github.com/SheepChef/Abracadabra", "_blank");
+}
+function openRelease() {
+  window.open("https://github.com/SheepChef/Abracadabra/releases", "_blank");
 }
 
 // ── Color Swatches ──────────────────────────────────────────────────
@@ -762,6 +774,14 @@ const isPWA = () => {
   return matchesPwa || window.navigator?.standalone || document.referrer.includes("android-app://");
 };
 function InstallPWA() {
+  const ua = navigator.userAgent;
+  if (
+    /MicroMessenger|WeChat|baiduboxapp|BaiduHD|baidubrowser|QQ\/|MQQBrowser|Weibo|AliApp|AlipayClient|DingTalk|ToutiaoMicroApp|NewsArticle|BytedanceWebview|aweme|Quark|UCBrowser/i.test(ua) ||
+    !('serviceWorker' in navigator)
+  ) {
+     showPWANotSupportedDialog();
+     return;
+  }
   if (deferredPWAPrompt) {
     deferredPWAPrompt.prompt();
     deferredPWAPrompt.userChoice.then(() => {
@@ -1373,7 +1393,7 @@ onUnmounted(() => {
             <div style="flex:1;">
               <h3 style="font-family: 'sans-serif';margin:0;font-size:1rem;color:var(--md-sys-color-on-surface);">安装魔曰
               </h3>
-              <p style="margin:4px 0 0;font-size:0.875rem;opacity:0.8;">将魔曰安装到本地</p>
+              <p style="margin:4px 0 0;font-size:0.875rem;opacity:0.8;">安装离线的网页应用</p>
             </div>
             <m3e-button variant="tonal" @click="InstallPWA">安装</m3e-button>
           </div>
@@ -1436,6 +1456,21 @@ onUnmounted(() => {
       </div>
       <div slot="actions" end>
         <m3e-button variant="filled" @click="closeCompatibilityDialog">明白</m3e-button>
+      </div>
+    </m3e-dialog>
+
+    <m3e-dialog id="PWANotSupportedDialog">
+      <div slot="header"
+        style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; gap: 12px; margin-bottom: 8px;">
+        <m3e-icon name="privacy_tip" style="font-size: 55px; color: var(--md-sys-color-primary);"></m3e-icon>
+        <span style="font-size: 24px;">安装失败</span>
+      </div>
+      <div style="line-break: anywhere;">
+        检测到兼容性问题，当前浏览环境不支持安装渐进式网页应用。您可使用正规浏览器再次尝试，也可前往GitHub下载APK。
+      </div>
+      <div slot="actions" end>
+        <m3e-button variant="outlined" @click="closePWANotSupportedDialog();openRelease();">前往GitHub</m3e-button>
+        <m3e-button variant="filled" @click="closePWANotSupportedDialog">明白</m3e-button>
       </div>
     </m3e-dialog>
 

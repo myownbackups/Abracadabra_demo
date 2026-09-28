@@ -1,4 +1,6 @@
 import { fileURLToPath, URL } from "node:url";
+import { rmSync } from 'node:fs';
+import { resolve } from 'node:path';
 
 import fs from "fs";
 import path from "path";
@@ -140,7 +142,18 @@ export default defineConfig({
       }
     }),
     ...(isExtension ? [
-      crx({ manifest })
+      crx({ manifest }),
+      {
+        name: 'remove-cf-headers',
+        closeBundle() {
+          rmSync(resolve('dist-chrome/_headers'), {
+            force: true,
+          });
+          rmSync(resolve('dist-firefox/_headers'), {
+            force: true,
+          });
+        }
+      }
     ] : []),
     ...(buildTarget === 'singlefile' ? [
       viteSingleFile()
